@@ -1,0 +1,56 @@
+{
+  "name": "json-field-size",
+  "version": "0.0.1",
+  "description": "A CLI tool to calculate size of all fields in a json, for memory analysis.",
+  "main": "index.js",
+  "scripts": {
+    "build": "clean-scripts build",
+    "lint": "clean-scripts lint",
+    "test": "clean-scripts test",
+    "fix": "clean-scripts fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plantain-00/json-field-size.git"
+  },
+  "author": "York Yao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/plantain-00/json-field-size/issues"
+  },
+  "homepage": "https://github.com/plantain-00/json-field-size#readme",
+  "devDependencies": {
+    "@commitlint/cli": "8.1.0",
+    "@commitlint/config-conventional": "8.1.0",
+    "@types/jasmine": "3.4.0",
+    "@types/minimist": "1.2.0",
+    "@types/node": "12.7.2",
+    "@typescript-eslint/eslint-plugin": "2.0.0",
+    "@typescript-eslint/parser": "2.0.0",
+    "clean-release": "2.7.0",
+    "clean-scripts": "1.12.1",
+    "eslint": "6.2.2",
+    "eslint-config-prettier": "6.1.0",
+    "eslint-plugin-plantain": "0.1.2",
+    "jasmine": "3.4.0",
+    "markdownlint-cli": "0.18.0",
+    "no-unused-export": "1.9.0",
+    "rimraf": "3.0.0",
+    "type-coverage": "2.2.0",
+    "typescript": "3.5.3"
+  },
+  "dependencies": {
+    "minimist": "1.2.0",
+    "tslib": "1.10.0"
+  },
+  "bin": {
+    "json-field-size": "bin/json-field-size"
+  },
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "typeCoverage": {
+    "atLeast": 100
+  }
+}
