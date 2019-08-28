@@ -7,14 +7,14 @@ module.exports = {
   build: [
     'rimraf dist/',
     'tsc -p src/',
-    'node dist/index.js --supressError > spec/result.txt'
+    'node dist/index.js spec/test.json --supressError > spec/result.txt'
   ],
   lint: {
     ts: `eslint --ext .js,.ts ${tsFiles} ${jsFiles}`,
     export: `no-unused-export ${tsFiles} --strict --need-module tslib`,
     commit: `commitlint --from=HEAD~1`,
     markdown: `markdownlint README.md`,
-    typeCoverage: 'type-coverage -p src --strict'
+    typeCoverage: 'type-coverage -p src'
   },
   test: [
     'tsc -p spec',

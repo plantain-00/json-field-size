@@ -16,4 +16,13 @@ A CLI tool to calculate size of all fields in a json, for memory analysis.
 
 ## usage
 
-run `json-field-size`
+run `json-field-size test.json`
+
+```txt
+┌─────────┬─────┬──────┬───────────┬─────────┐
+│ (index) │ key │ size │ totalSize │ percent │
+├─────────┼─────┼──────┼───────────┼─────────┤
+│    0    │ 'a' │  17  │    29     │  41.4   │
+│    1    │ 'b' │  7   │    29     │  75.9   │
+└─────────┴─────┴──────┴───────────┴─────────┘
+```

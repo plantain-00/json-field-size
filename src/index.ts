@@ -1,4 +1,6 @@
 import minimist from 'minimist'
+import * as fs from 'fs'
+import cloneDeep from 'lodash.clonedeep'
 import * as packageJson from '../package.json'
 
 let suppressError = false
@@ -12,6 +14,7 @@ async function executeCommandLine() {
     v?: unknown
     version?: unknown
     suppressError?: unknown
+    _: string[]
   }
 
   const showVersion = argv.v || argv.version
@@ -22,7 +25,64 @@ async function executeCommandLine() {
 
   suppressError = !!argv.suppressError
 
-  // todo
+  if (argv._.length === 0) {
+    throw new Error('need a json file')
+  }
+  const file = argv._[0]
+  const json: unknown = JSON.parse(fs.readFileSync(file).toString())
+  const totalSize = JSON.stringify(json).length
+
+  const keys: string[] = []
+  collectFields(json, keys)
+
+  const result: Array<{
+    key: string
+    size: number
+    totalSize: number
+    percent: number
+  }> = []
+  for (const key of keys) {
+    const obj = cloneDeep(json)
+    removeField(obj, key)
+    const size = JSON.stringify(obj).length
+    result.push({
+      key,
+      size,
+      totalSize,
+      percent: +(1 - size / totalSize).toFixed(3) * 100,
+    })
+  }
+  console.table(result)
+}
+
+function collectFields(obj: unknown, keys: string[]) {
+  if (Array.isArray(obj)) {
+    for (const item of obj as unknown[]) {
+      collectFields(item, keys)
+    }
+  }
+  if (typeof obj === 'object' && obj !== null) {
+    for (const key in obj) {
+      if (!keys.includes(key)) {
+        keys.push(key)
+      }
+      collectFields((obj as { [key: string]: unknown })[key], keys)
+    }
+  }
+}
+
+function removeField(obj: unknown, field: string) {
+  if (Array.isArray(obj)) {
+    for (const item of obj as unknown[]) {
+      removeField(item, field)
+    }
+  }
+  if (typeof obj === 'object' && obj !== null) {
+    delete (obj as { [key: string]: unknown })[field]
+    for (const key in obj) {
+      removeField((obj as { [key: string]: unknown })[key], field)
+    }
+  }
 }
 
 executeCommandLine().then(() => {
