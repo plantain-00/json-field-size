@@ -48,10 +48,6 @@
   "bin": {
     "json-field-size": "bin/json-field-size"
   },
-  "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "typeCoverage": {
     "atLeast": 100
   }
