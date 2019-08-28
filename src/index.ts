@@ -15,6 +15,7 @@ async function executeCommandLine() {
     version?: unknown
     suppressError?: unknown
     _: string[]
+    debug?: unknown
   }
 
   const showVersion = argv.v || argv.version
@@ -44,14 +45,19 @@ async function executeCommandLine() {
   for (const key of keys) {
     const obj = cloneDeep(json)
     removeField(obj, key)
-    const size = JSON.stringify(obj).length
+    const file = JSON.stringify(obj)
+    const size = file.length
     result.push({
       key,
       size,
       totalSize,
       percent: +(1 - size / totalSize).toFixed(3) * 100,
     })
+    if (argv.debug) {
+      fs.writeFileSync(key + '.json', file)
+    }
   }
+  result.sort((a, b) => b.percent - a.percent)
   console.table(result)
 }
 
