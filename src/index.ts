@@ -66,8 +66,7 @@ function collectFields(obj: unknown, keys: string[]) {
     for (const item of obj as unknown[]) {
       collectFields(item, keys)
     }
-  }
-  if (typeof obj === 'object' && obj !== null) {
+  } else if (typeof obj === 'object' && obj !== null) {
     for (const key in obj) {
       if (!keys.includes(key)) {
         keys.push(key)
@@ -82,8 +81,7 @@ function removeField(obj: unknown, field: string) {
     for (const item of obj as unknown[]) {
       removeField(item, field)
     }
-  }
-  if (typeof obj === 'object' && obj !== null) {
+  } else if (typeof obj === 'object' && obj !== null) {
     delete (obj as { [key: string]: unknown })[field]
     for (const key in obj) {
       removeField((obj as { [key: string]: unknown })[key], field)
