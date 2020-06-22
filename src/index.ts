@@ -9,6 +9,18 @@ function showToolVersion() {
   console.log(`Version: ${packageJson.version}`)
 }
 
+function showHelp() {
+  console.log(`Version ${packageJson.version}
+Syntax:   json-field-size [options] [file...]
+Examples: json-field-size test.json
+          json-field-size test.json --debug
+Options:
+ -h, --help                                         Print this message.
+ -v, --version                                      Print the version
+ --debug                                            Debug mode
+`)
+}
+
 async function executeCommandLine() {
   const argv = minimist(process.argv.slice(2), { '--': true }) as unknown as {
     v?: unknown
@@ -16,12 +28,19 @@ async function executeCommandLine() {
     suppressError?: unknown
     _: string[]
     debug?: unknown
+    h?: unknown
+    help?: unknown
   }
 
   const showVersion = argv.v || argv.version
   if (showVersion) {
     showToolVersion()
     return
+  }
+
+  if (argv.h || argv.help) {
+    showHelp()
+    process.exit(0)
   }
 
   suppressError = !!argv.suppressError

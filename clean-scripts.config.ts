@@ -14,7 +14,7 @@ export default {
     export: `no-unused-export ${tsFiles} --strict --need-module tslib`,
     commit: `commitlint --from=HEAD~1`,
     markdown: `markdownlint README.md`,
-    typeCoverage: 'type-coverage -p src'
+    typeCoverage: 'type-coverage -p src --strict'
   },
   test: [
     'clean-release --config clean-run.config.ts',

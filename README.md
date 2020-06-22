@@ -27,6 +27,10 @@ run `json-field-size test.json`
 └─────────┴─────┴──────┴───────────┴─────────┘
 ```
 
-## debug
+## options
 
-`json-field-size test.json --debug`
+key | description
+--- | ---
+--debug | debug mode
+-h,--help | Print this message.
+-v,--version | Print the version
