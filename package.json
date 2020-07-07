@@ -1,6 +1,6 @@
 {
   "name": "json-field-size",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A CLI tool to calculate size of all fields in a json, for memory analysis.",
   "main": "index.js",
   "scripts": {
