@@ -41,7 +41,7 @@
   "dependencies": {
     "lodash.clonedeep": "^4.5.0",
     "minimist": "1.2.5",
-    "tslib": "2.0.0"
+    "tslib": "1 || 2"
   },
   "bin": {
     "json-field-size": "bin/json-field-size"
