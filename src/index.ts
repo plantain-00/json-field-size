@@ -48,7 +48,7 @@ async function executeCommandLine() {
   if (argv._.length === 0) {
     throw new Error('need a json file')
   }
-  const file = argv._[0]
+  const file = argv._[0]!
   const json: unknown = JSON.parse(fs.readFileSync(file).toString())
   const totalSize = JSON.stringify(json).length
 
